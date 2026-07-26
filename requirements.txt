@@ -1,0 +1,12 @@
+pyarrow
+pandas
+duckdb
+streamlit
+isort
+python-dotenv
+selenium==4.41.0
+webdriver-manager
+streamlit-aggrid
+google-cloud-bigquery
+google-auth
+rich
