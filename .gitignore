@@ -2,3 +2,6 @@
 .ipynb_checkpoints/
 .env
 .streamlit/secrets.toml
+data/citibike_complete.parquet
+data/citibike.parquet
+data/*.parquet
