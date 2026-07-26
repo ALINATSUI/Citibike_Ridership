@@ -172,7 +172,7 @@ def get_q3_data(_con):
     return _con.sql("""
         SELECT 
             COUNT(tripduration) TRIP 
-        FROM FROM bq_citibike.new_york_citibike.citibike_trips
+        FROM bq_citibike.new_york_citibike.citibike_trips
                   """).df()
 result_q3 = get_q3_data(con)
 q3_df = st.dataframe(result_q3, hide_index=True, column_config=
