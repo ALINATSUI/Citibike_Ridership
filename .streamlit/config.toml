@@ -1,0 +1,11 @@
+[theme]
+
+font = "Nunito Sans:https://fonts.googleapis.com/css2?family=Nunito+Sans"
+base = 'light'
+#primaryColor = '#eabeb9'
+textColor = "#1F4E79"
+dataframeBorderColor = "steelblue"
+dataframeHeaderBackgroundColor = "lightblue"
+baseFontWeight = 600
+baseFontSize = 17
+baseRadius = "large"
