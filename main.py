@@ -27,7 +27,7 @@ credentials = service_account.Credentials.from_service_account_info(
 client = bigquery.Client(credentials=credentials)
 credentials.refresh(Request())
 
-@st.cache_data()
+@st.cache_data
 #Google BigQuery client
 def run_query(query): 
     query_job = client.query(query)
@@ -90,7 +90,7 @@ con = get_connection()
 
 
 
-@st.cache_data
+@st.cache_data(ttl=None)
 def get_q1_data(_con):
     return _con.sql("""
         SELECT name,usaf
@@ -133,7 +133,7 @@ q2.write("""
 """)
 
 
-@st.cache_data
+@st.cache_data(ttl=None)
 def get_q2_data(_con):
     return _con.sql("""
         SELECT 
@@ -167,7 +167,7 @@ q3.write("""
 """)
 st.space(size='large')
 
-@st.cache_data
+@st.cache_data(ttl=None)
 def get_q3_data(_con):
     return _con.sql("""
         SELECT 
@@ -202,7 +202,7 @@ q4.write("""
 """)
 st.space(size='medium')
 
-@st.cache_data
+@st.cache_data(ttl=None)
 def get_q4_data(_con):
     return _con.sql("""
                     SELECT 
@@ -231,7 +231,7 @@ q5.write("""Extend your Step 5 query: for each day, also compute the average tri
 
          """)
 
-@st.cache_data
+@st.cache_data(ttl=None)
 def get_q5_data(_con):
     return _con.sql("""
                     SELECT 
