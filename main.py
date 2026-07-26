@@ -27,7 +27,6 @@ credentials = service_account.Credentials.from_service_account_info(
 client = bigquery.Client(credentials=credentials)
 credentials.refresh(Request())
 
-
 @st.cache_data()
 #Google BigQuery client
 def run_query(query): 
@@ -62,7 +61,7 @@ def get_connection():
             """)
     
     con.sql(f"""
-        ATTACH 'project=bigquery-public-data dataset=new_york_citibike billing_project={project_id}' AS bq_citibike (TYPE bigquery, READ_ONLY)
+        ATTACH 'project=bigquery-public-data dataset=new_york_citibike billing_project={project_id}'AS bq_citibike (TYPE bigquery, READ_ONLY)
         """)
     con.sql(f"""
         ATTACH 'project=bigquery-public-data dataset=noaa_gsod billing_project={project_id}' AS bq_gsod_stations (TYPE bigquery, READ_ONLY)
@@ -144,7 +143,7 @@ def get_q2_data(_con):
             EXTRACT(hour FROM stoptime) stop_time_HOUR,
             EXTRACT(minute FROM stoptime) stop_time_MINUTE
                    
-        FROM 'data/citibike.parquet'  
+        FROM bq_citibike.new_york_citibike.citibike_trips
         WHERE 
             starttime IS NOT NULL
         LIMIT 10
@@ -173,7 +172,7 @@ def get_q3_data(_con):
     return _con.sql("""
         SELECT 
             COUNT(tripduration) TRIP 
-        FROM 'data/citibike_complete.parquet'
+        FROM FROM bq_citibike.new_york_citibike.citibike_trips
                   """).df()
 result_q3 = get_q3_data(con)
 q3_df = st.dataframe(result_q3, hide_index=True, column_config=
@@ -209,7 +208,7 @@ def get_q4_data(_con):
                     SELECT 
                    starttime::DATE AS ride_date, 
                    COUNT(*) num_rides
-FROM 'data/citibike_complete.parquet'
+FROM bq_citibike.new_york_citibike.citibike_trips
 WHERE starttime IS NOT NULL
 GROUP BY ride_date
 
@@ -237,7 +236,7 @@ def get_q5_data(_con):
     return _con.sql("""
                     SELECT 
 starttime ::DATE AS ride_date, COUNT(*) num_rides, ROUND(AVG(tripduration/60),2) avg_duration_min,
-FROM 'data/citibike_complete.parquet'
+FROM FROM bq_citibike.new_york_citibike.citibike_trips
 WHERE starttime IS NOT NULL
 GROUP BY ride_date
 ORDER BY ride_date ASC
@@ -313,7 +312,7 @@ WITH
     SELECT 
       EXTRACT(DATE FROM starttime) ride_date, FORMAT_DATE("%A", (EXTRACT(DATE FROM starttime))) day_of_week, 
       EXTRACT(month FROM starttime) month, COUNT(*) num_rides, ROUND(AVG(tripduration/ 60), 2) avg_duration_min,
-    FROM bigquery-public-data.new_york_citibike.citibike_trips CITIBIKE
+    FROM FROM bq_citibike.new_york_citibike.citibike_trips
       WHERE starttime IS NOT NULL
       GROUP BY ride_date, day_of_week,  month
       ORDER BY ride_date 
@@ -325,7 +324,7 @@ WITH
       PARSE_DATE("%Y-%m-%d",CONCAT(year,'-',mo,'-',da)) obs_date, 
       temp temp_f,  `min` min_temp_f, `max` max_temp_f,wdsp wind_speed_knots, prcp precip_in, 
 
-    FROM `bigquery-public-data.noaa_gsod.gsod20*` GSOD
+    FROM `bigquery-public-data.noaa_gsod.gsod20*` 
       WHERE stn = '725030'AND _TABLE_SUFFIX BETWEEN '13' AND '18'
       ORDER BY obs_date ASC
 )
