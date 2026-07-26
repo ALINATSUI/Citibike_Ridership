@@ -311,8 +311,8 @@ WITH
   daily_rides AS (
     SELECT 
       EXTRACT(DATE FROM starttime) ride_date, FORMAT_DATE("%A", (EXTRACT(DATE FROM starttime))) day_of_week, 
-      EXTRACT(month FROM starttime) month, COUNT(*) num_rides, ROUND(AVG(tripduration/ 60), 2) avg_duration_min,
-    FROM bq_citibike.new_york_citibike.citibike_trips
+      EXTRACT(month FROM starttime) month, COUNT(*) num_rides, ROUND(AVG(tripduration/ 60), 2) avg_duration_min
+    FROM bigquery-public-data.new_york_citibike.citibike_trips
       WHERE starttime IS NOT NULL
       GROUP BY ride_date, day_of_week,  month
       ORDER BY ride_date 
@@ -322,7 +322,7 @@ WITH
   daily_weather AS (
     SELECT CONCAT(year,'-',mo,'-',da) concat_date,
       PARSE_DATE("%Y-%m-%d",CONCAT(year,'-',mo,'-',da)) obs_date, 
-      temp temp_f,  `min` min_temp_f, `max` max_temp_f,wdsp wind_speed_knots, prcp precip_in, 
+      temp temp_f,  `min` min_temp_f, `max` max_temp_f,wdsp wind_speed_knots, prcp precip_in
 
     FROM `bigquery-public-data.noaa_gsod.gsod20*` 
       WHERE stn = '725030'AND _TABLE_SUFFIX BETWEEN '13' AND '18'
