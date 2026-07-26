@@ -236,7 +236,7 @@ def get_q5_data(_con):
     return _con.sql("""
                     SELECT 
 starttime ::DATE AS ride_date, COUNT(*) num_rides, ROUND(AVG(tripduration/60),2) avg_duration_min,
-FROM FROM bq_citibike.new_york_citibike.citibike_trips
+FROM bq_citibike.new_york_citibike.citibike_trips
 WHERE starttime IS NOT NULL
 GROUP BY ride_date
 ORDER BY ride_date ASC
@@ -312,7 +312,7 @@ WITH
     SELECT 
       EXTRACT(DATE FROM starttime) ride_date, FORMAT_DATE("%A", (EXTRACT(DATE FROM starttime))) day_of_week, 
       EXTRACT(month FROM starttime) month, COUNT(*) num_rides, ROUND(AVG(tripduration/ 60), 2) avg_duration_min,
-    FROM FROM bq_citibike.new_york_citibike.citibike_trips
+    FROM bq_citibike.new_york_citibike.citibike_trips
       WHERE starttime IS NOT NULL
       GROUP BY ride_date, day_of_week,  month
       ORDER BY ride_date 
