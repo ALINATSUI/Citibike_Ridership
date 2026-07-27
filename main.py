@@ -347,8 +347,14 @@ st.image('docs/Question7.png', width='content', caption='SQL query: Question 7')
 
 # ** Creating .sql file **
 
-# sql_file = con.sql("""CREATE TABLE build_dataset AS 
-#                    SELECT * 
-#                    FROM read_csv('data/citibike_weather_daily.csv');
-# """)
-# con.sql("EXPORT DATABASE 'queries/' (FORMAT csv)")
+sql_file = """
+CREATE TABLE build_dataset AS 
+    SELECT * 
+    FROM read_csv('data/citibike_weather_daily.csv');
+"""
+
+with open("queries/build_dataset.sql", "w") as f:
+    f.write(sql_file)
+
+
+con.sql(sql_file)    
