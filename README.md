@@ -22,4 +22,6 @@ Using CitiBike and NOAA public datasets hosted on Google BigQuery, this project 
 |.github/workflows/wake.yml ----> Wakeup timer configuration
  
 ## Tech Stack
-This project uses DuckDB with the community BigQuery extension to query Google BigQuery's public datasets directly. It also uses the google-cloud-bigquery Python client for a subset of queries. The front end is built with Streamlit that allows for interactive, searchable data tables.      
+This project uses DuckDB with the community BigQuery extension to query Google BigQuery's public datasets directly. It also uses the google-cloud-bigquery Python client for a subset of queries. The front end is built with Streamlit that allows for interactive, searchable data tables.   
+
+To prevent the app from spinning down due to inactivity, a GitHub Actions workflow runs every 7 hours via a cron schedule and uses Selenium to ping the app via the GitHub runner, keeping it awake.
