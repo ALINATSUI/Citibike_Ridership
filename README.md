@@ -49,7 +49,7 @@ private_key_id = "your-private-key-id"
 private_key = "your-private-key"
 client_email = "your-service-account-email"
 client_id = "your-client-id"
-# ...remaining standard service account fields
+
 ```
 
 This file is excluded from version control via `.gitignore` and should never be committed. 
