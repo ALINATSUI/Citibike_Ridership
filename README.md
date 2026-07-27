@@ -10,13 +10,15 @@ Using CitiBike and NOAA public datasets hosted on Google BigQuery, this project 
 | `code/`  | eda.ipynb, preprocessing.ipynb, model.ipynb
 | `data/`  | citibike_weather_daily.csv, citibike.parquet, citibike_complete.parquet | 
 | `docs/`  | Supporting documentation (i.e, images)git
-| `queries`| build_dataset.sql, build_dataset.csv, load.sql, schema.sql
-
+| `queries`| build_dataset.sql, load.sql, schema.sql
+|`.github/workflows` | For Github Actions workflow
 
 | Files | 
 | ------|
 | `main.py` | 
 | `requirements.txt` |
 | `README.md`
+|`streamlit.py` ------> Selenium to wakeup Streamlit app through Github Actions workflow
+|.github/workflows/wake.yml ----> Wakeup timer configuration
  
       

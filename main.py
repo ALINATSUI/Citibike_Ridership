@@ -10,12 +10,12 @@ secret_key = os.environ["SECRET"]
 import duckdb
 import isort
 import pandas as pd
-import pyarrow as pa
+
 import streamlit as st
 from google.auth.transport.requests import Request
 from google.cloud import bigquery
 from google.oauth2 import service_account
-from st_aggrid import AgGrid, ColumnsAutoSizeMode, GridOptionsBuilder
+from st_aggrid import AgGrid
 
 st.set_page_config(layout="wide")
 project_id = os.environ["GCP_PROJECT_ID"]
@@ -38,17 +38,17 @@ def run_query(query):
 @st.cache_resource(ttl=3000)
 def get_connection():
     con = duckdb.connect()
-    con.sql(f"""
-            INSTALL httpfs;
-            LOAD httpfs;
-            """)
-    con.sql(f"""
-                CREATE SECRET my_secret (
-                TYPE gcs,
-                KEY_ID '{key_id}',
-                SECRET '{secret_key}'
-                )
-            """);
+    # con.sql(f"""
+    #         INSTALL httpfs;
+    #         LOAD httpfs;
+    #         """)
+    # con.sql(f"""
+    #             CREATE SECRET my_secret (
+    #             TYPE gcs,
+    #             KEY_ID '{key_id}',
+    #             SECRET '{secret_key}'
+    #             )
+    #         """);
    
     con.sql(f"""
             INSTALL bigquery FROM community;
@@ -179,12 +179,6 @@ q3_df = st.dataframe(result_q3, hide_index=True, column_config=
                      {'TRIP': 'Total Trips'})            
                       
 st.image('docs/Question3.png', width='content', caption='SQL query: Question 3')
-q3_summary = st.write("""
-
-        There are limitations due to the size of the Citibike table (more than 53 million trips).  As a test exercise, I was able to export the Google BigQuery query into Google Cloud Storage, then save as a parquet file. 
-                      
-        Parquet files allows for efficient storage and faster load times when compared to CSV. I then remotely copied the parquet file locally to `data/citibike_complete.parquet` using DuckDB. No need to convert to pandas in this case.   
-        """)
 
 q4 = st.container(
       width='stretch', 
