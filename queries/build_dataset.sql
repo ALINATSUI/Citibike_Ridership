@@ -1,1 +1,4 @@
-COPY build_dataset FROM 'queries//build_dataset.csv' (FORMAT 'csv', quote '"', delimiter ',', header 1);
+
+CREATE TABLE build_dataset AS 
+    SELECT * 
+    FROM read_csv('data/citibike_weather_daily.csv');
