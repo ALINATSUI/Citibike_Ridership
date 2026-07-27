@@ -58,7 +58,7 @@ This file is excluded from version control via `.gitignore` and should never be 
 
 If you're planning on using the Streamlit Community cloud to share your app, you'll need to implement the Streamlit Secrets Manager when deploying the app. 
 
-You'll need to navigate to the `Advanced Settings` when deploying Streamlit Community Cloud app and populate the environment variables that were configured in `.streamlit/secrets.toml`. 
+You'll need to navigate to the `Advanced Settings` when deploying Streamlit Community Cloud app and populate the environment variables that were configured in `.streamlit/secrets.toml` in your local development environment. 
 
 
 
