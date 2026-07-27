@@ -358,3 +358,5 @@ with open("queries/build_dataset.sql", "w") as f:
 
 
 con.sql(sql_file)    
+
+print(con.sql("SHOW TABLES"))
