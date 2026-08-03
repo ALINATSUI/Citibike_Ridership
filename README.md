@@ -1,7 +1,9 @@
 # Citibike Ridership #
 
 
-Using CitiBike and NOAA public datasets hosted on Google BigQuery, this project analyzes how NYC weather affects bike-share ridership, using aggregated daily trip data from 2013–2018.
+Using CitiBike and NOAA public datasets hosted on Google BigQuery, this project analyzes how NYC weather affects bike-share ridership, using aggregated daily trip data from 2013–2018.  
+
+**Live app: ** [citibike-ridership.streamlit.app](https://citibike-ridership.streamlit.app)
 
 ## Repository Structure ## 
 
