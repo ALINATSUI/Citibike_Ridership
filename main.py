@@ -330,6 +330,7 @@ DR.avg_duration_min,
 DR.num_rides,
 DW.temp_f,
 DW.max_temp_f,
+DW.min_temp_f,                     
 DW.wind_speed_knots,
 DW.precip_in
   
